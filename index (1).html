@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shadify</title>
+<meta name="description" content="Shadify — personal space on the web." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f7f5fb;
+    --surface: #ffffff;
+    --ink: #221830;
+    --muted: #7c7191;
+    --accent: #ff5d73;
+    --accent-2: #6c4ee3;
+    --accent-2-soft: #efeafc;
+    --radius: 18px;
+    --max: 960px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, .logo {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 48px);
+  }
+
+  /* Nav */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+    background: rgba(247, 245, 251, 0.75);
+  }
+  nav .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 1.15rem;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: clamp(16px, 4vw, 32px);
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .nav-links a { text-decoration: none; color: var(--muted); transition: color 0.15s ease; }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 82vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .orb {
+    position: absolute;
+    width: 620px;
+    height: 620px;
+    right: -160px;
+    top: -120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--accent) 0%, var(--accent-2) 55%, transparent 75%);
+    opacity: 0.35;
+    filter: blur(50px);
+    animation: float 14s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-30px, 30px) scale(1.05); }
+  }
+  .hero-content { position: relative; z-index: 1; animation: rise 0.7s ease both; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent-2);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 700;
+    margin: 0 0 20px;
+    max-width: 14ch;
+  }
+  h1 .accent { color: var(--accent); }
+  .tagline {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    color: var(--muted);
+    max-width: 46ch;
+    margin: 0 0 34px;
+  }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary, .btn-ghost {
+    display: inline-block;
+    padding: 13px 26px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary { background: var(--ink); color: #fff; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(34,24,48,0.22); }
+  .btn-ghost { border: 1.5px solid var(--muted); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+  /* Sections */
+  section.block { padding: 88px 0; }
+  .block h2 {
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    margin: 0 0 20px;
+  }
+  #about p { color: var(--muted); max-width: 62ch; font-size: 1.05rem; }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .link-card {
+    background: var(--surface);
+    border: 1px solid #ece7f6;
+    border-radius: var(--radius);
+    padding: 22px;
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .link-card span.arrow { color: var(--accent-2); transition: transform 0.15s ease; }
+  .link-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(108,78,227,0.14);
+    border-color: var(--accent-2-soft);
+  }
+  .link-card:hover span.arrow { transform: translateX(4px); }
+
+  footer {
+    padding: 40px 0 60px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    border-top: 1px solid #ece7f6;
+    margin-top: 40px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orb { animation: none; }
+    .hero-content { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  @media (max-width: 560px) {
+    .nav-links { gap: 14px; font-size: 0.85rem; }
+    section.block { padding: 64px 0; }
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap">
+      <!-- Change "Shadify" to whatever you want your site to be called -->
+      <a class="logo" href="#top">Shadify</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#connect">Connect</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero" id="top">
+    <div class="orb" aria-hidden="true"></div>
+    <div class="wrap hero-content">
+      <p class="eyebrow">Hey, I'm</p>
+      <!-- Replace "Your Name" with your actual name or handle -->
+      <h1>Your Name <span class="accent">— aka Shadify</span></h1>
+      <!-- Replace this line with a sentence about what this site is for -->
+      <p class="tagline">This is my little corner of the internet — a place to share what I'm making and find me elsewhere online.</p>
+      <div class="cta-row">
+        <a class="btn-primary" href="#connect">Find me online</a>
+        <a class="btn-ghost" href="#about">About me</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="wrap">
+      <h2>About</h2>
+      <!-- Replace this paragraph with a couple of sentences about yourself -->
+      <p>Write a couple of sentences here about who you are, what you're into, and what you're working on. Keep it short — a few honest lines is better than a long bio nobody reads.</p>
+    </div>
+  </section>
+
+  <section class="block" id="connect">
+    <div class="wrap">
+      <h2>Find me</h2>
+      <div class="links-grid">
+        <!-- Update these hrefs to your real links, and remove any you don't use -->
+        <a class="link-card" href="https://instagram.com/earomantic" target="_blank" rel="noopener">Instagram <span class="arrow">→</span></a>
+        <a class="link-card" href="#" target="_blank" rel="noopener">YouTube <span class="arrow">→</span></a>
+        <a class="link-card" href="mailto:alphajohnson514@gmail.com">Email <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span id="year"></span> · made by me, for me.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
